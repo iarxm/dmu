@@ -1,0 +1,37 @@
+#!/bin/env bash
+
+_dmenu_cmd="dmenu -b -nb #000000 -l 10"
+
+_set_ws_cur() { ws_cur=$(wmctrl -d | awk '$2 == "*" {print $1}'); }
+_set_ws_lsa() { ws_lsa=$(wmctrl -l | awk '{print $2}' | sort -u | grep -v -e "^\(-1\|N/A\)$");}
+_win_ls()     { wmctrl -l | awk -v ws="$1" '$2 == ws { for(i=4;i<=NF;++i) printf "%s ", $i; printf "\n" }'; } ## ls all wins on a ws
+_win_ls_cur() { _win_ls "$ws_cur"; } # Prepare the dmenu input string
+
+env_all () { # TODO
+  # ls all wins on all ws's; loop & concat dmenu string
+	_set_ws_lsa
+	for ws in "$ws_lsa"; do
+		echo "$workspace" >> $HOME/zlog.tmp #debug
+		echo "$windows" >> $HOME/zlog.tmp #debug
+    [ "$ws" == "$ws_cur" ] \
+      && dmenu_input+="$windows\n" \
+      || dmenu_input+="$workspace : $windows\n"
+  done }
+
+_grab_selected() { # display dmenu & get selected 
+	win_sel="$(echo -e $dmenu_input | $_dmenu_cmd)"
+	wmctrl -i -a "$win_sel" ;}
+
+_main() {
+  _set_ws_cur
+  dmenu_input="$(_win_ls_cur)"
+  echo -e "$dmenu_input" | $_dmenu_cmd;}
+
+_main
+
+# rm "$HOME/zlog.tmp" #debug
+# echo "$ws_list_cur" >> $HOME/zlog.tmp #debug
+
+# DMENU
+
+# vim:ft=bash
