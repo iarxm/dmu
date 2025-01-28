@@ -1,10 +1,7 @@
 #!/bin/bash
 # =====================================================
 # WITH HISTORY AND ALIASES
-#
-# DESCRIPTION:
 # - Updated DMENU_RUN script to add aliases and a history
-#
 # =====================================================
 
 cache=~/.cache/dmenu_run
