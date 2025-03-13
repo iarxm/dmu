@@ -1,15 +1,15 @@
 #!/bin/bash
-# =====================================================
-# WITH HISTORY AND ALIASES
-# - Updated DMENU_RUN script to add aliases and a history
-# =====================================================
+# dmenu run with history and aliases
 
 cache=~/.cache/dmenu_run
 freq="$HOME/.local/share/HISTORY.dmenu"
 aliases="$HOME/.config/shell/aliases"
+aliase2="$HOME/.config/shelx/alias_all-personal"
 #dmenucmd='dmenu -i -dim .6 -h 20 -nb #002b36 -nf #586e75 -sb #073642 -sf #93a1a1'
-dmenucmd='dmenu -b -nb #000000'
+#dmenucmd='dmenu -b -nb #000000'
+dmenucmd='dmenu -b -nb black -nf #efef8f -sb black -sf white'
 source $aliases
+source $aliase2
 
 #pull our previously run commands in
 history=$(<$freq)
