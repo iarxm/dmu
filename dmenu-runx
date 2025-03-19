@@ -2,7 +2,7 @@
 # dmenu run with history and aliases
 
 cache=~/.cache/dmenu_run
-freq="$HOME/.local/share/HISTORY.dmenu"
+freq="${HISTDMU}"
 aliases="$HOME/.config/shell/aliases"
 aliase2="$HOME/.config/shelx/alias_all-personal"
 #dmenucmd='dmenu -i -dim .6 -h 20 -nb #002b36 -nf #586e75 -sb #073642 -sf #93a1a1'
